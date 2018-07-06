@@ -395,4 +395,17 @@ public class DatosCliente {
     public void setGeoBlue(Long geoBlue) {
         this.geoBlue = geoBlue;
     }
+	public Object getApellido1() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public String getIdentificador() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public Object getApellido2() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

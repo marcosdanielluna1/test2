@@ -26,7 +26,8 @@ import com.mycorp.support.PolizaBasicoFromPolizaBuilder;
 import com.mycorp.support.Ticket;
 import com.mycorp.support.ValueCode;
 
-import portalclientesweb.ejb.interfaces.PortalClientesWebEJBRemote;
+
+import util.datos.DetallePoliza;
 import util.datos.PolizaBasico;
 import util.datos.UsuarioAlta;
 
@@ -68,7 +69,7 @@ public class ZendeskService {
 
     /** The portalclientes web ejb remote. */
     @Autowired
-    // @Qualifier("portalclientesWebEJB")
+    @Qualifier("portalclientesWebEJB")
     private PortalClientesWebEJBRemote portalclientesWebEJBRemote;
 
     /** The rest template. */
@@ -100,14 +101,14 @@ public class ZendeskService {
 
         // AÃ±ade los datos del formulario
         if(StringUtils.isNotBlank(usuarioAlta.getNumPoliza())){
-            datosUsuario.append("NÂº de poliza/colectivo: ").append(usuarioAlta.getNumPoliza()).append("/").append(usuarioAlta.getNumDocAcreditativo()).append(ESCAPED_LINE_SEPARATOR);
+            datosUsuario.append("Nº de poliza/colectivo: ").append(usuarioAlta.getNumPoliza()).append("/").append(usuarioAlta.getNumDocAcreditativo()).append(ESCAPED_LINE_SEPARATOR);
         }else{
-            datosUsuario.append("NÂº tarjeta Sanitas o Identificador: ").append(usuarioAlta.getNumTarjeta()).append(ESCAPED_LINE_SEPARATOR);
+            datosUsuario.append("Nº tarjeta Sanitas o Identificador: ").append(usuarioAlta.getNumTarjeta()).append(ESCAPED_LINE_SEPARATOR);
         }
         datosUsuario.append("Tipo documento: ").append(usuarioAlta.getTipoDocAcreditativo()).append(ESCAPED_LINE_SEPARATOR);
-        datosUsuario.append("NÂº documento: ").append(usuarioAlta.getNumDocAcreditativo()).append(ESCAPED_LINE_SEPARATOR);
+        datosUsuario.append("Nº documento: ").append(usuarioAlta.getNumDocAcreditativo()).append(ESCAPED_LINE_SEPARATOR);
         datosUsuario.append("Email personal: ").append(usuarioAlta.getEmail()).append(ESCAPED_LINE_SEPARATOR);
-        datosUsuario.append("NÂº mÃ³vil: ").append(usuarioAlta.getNumeroTelefono()).append(ESCAPED_LINE_SEPARATOR);
+        datosUsuario.append("Nº móvil: ").append(usuarioAlta.getNumeroTelefono()).append(ESCAPED_LINE_SEPARATOR);
         datosUsuario.append("User Agent: ").append(userAgent).append(ESCAPED_LINE_SEPARATOR);
 
         datosBravo.append(ESCAPED_LINE_SEPARATOR + "Datos recuperados de BRAVO:" + ESCAPED_LINE_SEPARATOR + ESCAPED_LINE_SEPARATOR);
@@ -138,7 +139,7 @@ public class ZendeskService {
 
                 PolizaBasico polizaBasicoConsulta = new PolizaBasicoFromPolizaBuilder().withPoliza( poliza ).build();
 
-                final util.datos.DetallePoliza detallePolizaResponse = portalclientesWebEJBRemote.recuperarDatosPoliza(polizaBasicoConsulta);
+                final DetallePoliza detallePolizaResponse = portalclientesWebEJBRemote.recuperarDatosPoliza(polizaBasicoConsulta);
 
                 clientName.append(detallePolizaResponse.getTomador().getNombre()).
                             append(" ").
